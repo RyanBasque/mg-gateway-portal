@@ -1,6 +1,6 @@
 class ApiService {
   constructor() {
-    this.baseURL = "http://localhost:3001";
+    this.baseURL = import.meta.env.VITE_API_URL ?? "http://localhost:3001";
   }
 
   async request(endpoint, options = {}) {
