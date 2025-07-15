@@ -22,6 +22,13 @@ const Login = () => {
       return;
     }
 
+    // Debug: mostrar informações do ambiente
+    console.log('Environment:', {
+      NODE_ENV: import.meta.env.MODE,
+      API_URL: import.meta.env.VITE_API_URL,
+      BASE_URL: window.location.origin
+    });
+
     console.log('Tentando fazer login com:', { email, password });
     const result = await login(email, password);
     
@@ -88,7 +95,21 @@ const Login = () => {
             />
           </div>
 
-          {error && <div className="error-message">{error}</div>}
+          {error && (
+            <div className="error-message">
+              <strong>Erro:</strong> {error}
+              <br />
+              <small>
+                Verifique sua conexão e tente novamente. 
+                {import.meta.env.MODE === 'development' && (
+                  <>
+                    <br />
+                    <strong>Debug:</strong> API URL = {import.meta.env.VITE_API_URL}
+                  </>
+                )}
+              </small>
+            </div>
+          )}
 
           <button 
             type="submit" 
